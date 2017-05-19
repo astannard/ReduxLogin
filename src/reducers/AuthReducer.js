@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     password:'',
     user:null,
     apploading: false,
+    error: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,12 +15,14 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, email: action.payload };
         case PASSWORD_CHANGED:
             return { ...state, password: action.payload }; 
-        case LOGIN_USER_SUCCESS:
-            return { ...state, user: action.payload};
+        case LOGIN_USER_SUCCESS: 
+            console.log('authreducer: logged in', action.payload );
+            return { ...state, ...INITIAL_STATE, user: action.payload };
         case LOGIN_USER_FAIL:
-            return { ...state};
+            return { ...state, apploading: false, password: '', error:'authentication failed'};
         case LOGOUT_USER_SUCCESS:
-            return { ...state, user: null};
+            
+            return { ...state, user: null, apploading: false};
         case LOADING:
             return { ...state, apploading: true};
         case LOADED:

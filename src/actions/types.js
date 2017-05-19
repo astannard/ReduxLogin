@@ -5,3 +5,7 @@ export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS'
 export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL';
 export const LOADING = 'LOADING';
 export const LOADED = 'LOADED';
+
+
+export const GET_COMPANIES = 'GET_COMPANIES';
+export const COMPANIES_LOADED = 'COMPANIES_LOADED';

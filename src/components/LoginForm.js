@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button, Spinner} from './common';
 import { emailChanged, passwordChanged, loginUser, logoutUser, loading } from '../actions';
 
+
 class LoginForm extends Component{
 
     onEmailChange(text){
@@ -48,15 +49,17 @@ class LoginForm extends Component{
                          value={this.props.password}/>
 
                 </CardSection>
-
                 <CardSection>
                     <Button onPress={this.loginUserPressed.bind(this)}>Login</Button>
                 </CardSection>
 
             </Card>)
         }else{
+            
+
             screen = (<Card>
                 <Text>Logged In</Text>
+                <Text>Key:{this.props.user.ApiKey}</Text>
                 <CardSection>
                     <Button onPress={this.logUserOut.bind(this)}>Logout</Button>
                 </CardSection>
@@ -72,7 +75,8 @@ const mapStateToProps = state => {
         email: state.auth.email,
         password: state.auth.password,
         apploading: state.auth.apploading,
-        user: state.auth.user
+        user: state.auth.user,
+        error: state.auth.error,
     }
 }
 
