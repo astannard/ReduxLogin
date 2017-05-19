@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button, Spinner} from './common';
 import { emailChanged, passwordChanged, loginUser, logoutUser, loading } from '../actions';
-
+import { getCompanyList, } from '../actions/company';
 
 class LoginForm extends Component{
 
@@ -19,6 +19,17 @@ class LoginForm extends Component{
         console.log('attempt login');
         const {email,  password} = this.props;
         this.props.loginUser({email, password});
+    }
+
+    loadCompanies(){
+
+       const {Username,ApiKey} = this.props.user;
+               
+
+
+        console.log('attempt getCompanyList');
+
+         this.props.getCompanyList({username: Username,apiKey: ApiKey});
     }
 
     logUserOut(){
@@ -55,14 +66,22 @@ class LoginForm extends Component{
 
             </Card>)
         }else{
+            let company = (<CardSection><Text>No companies</Text></CardSection>) 
+            if (this.props.companies.length > 0 ) {
+                company = (<CardSection><Text>{this.props.companies[0].Name}</Text></CardSection>)
+            }
             
-
             screen = (<Card>
                 <Text>Logged In</Text>
                 <Text>Key:{this.props.user.ApiKey}</Text>
+       
                 <CardSection>
                     <Button onPress={this.logUserOut.bind(this)}>Logout</Button>
                 </CardSection>
+                <CardSection>
+                    <Button onPress={this.loadCompanies.bind(this)}>Load Companies</Button>
+                </CardSection>
+                {company}
                 </Card>)
         }
         return screen;
@@ -77,6 +96,8 @@ const mapStateToProps = state => {
         apploading: state.auth.apploading,
         user: state.auth.user,
         error: state.auth.error,
+        companies: state.companies.companies,
+        companyerror: state.companies.error
     }
 }
 
@@ -85,5 +106,6 @@ export default connect(mapStateToProps,{
     passwordChanged, 
     loginUser,
     logoutUser,
-    loading
+    loading,
+    getCompanyList,
 })(LoginForm);

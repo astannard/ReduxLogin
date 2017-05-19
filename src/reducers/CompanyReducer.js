@@ -1,9 +1,10 @@
-import {GET_COMPANIES, COMPANIES_LOADED, LOGIN_USER_SUCCESS} from '../actions/types';
+import {GET_COMPANIES, COMPANIES_LOADED, COMPANIES_FAILED, LOGIN_USER_SUCCESS} from '../actions/types';
 
 import { getCompanyList } from '../actions/company'
 
 const INITIAL_STATE = {
-    companies: []
+    companies: [],
+    error:''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,16 +13,11 @@ export default (state = INITIAL_STATE, action) => {
 
         case LOGIN_USER_SUCCESS :
             console.log('companyReducer: LOGIN_USER_SUCCESS', action.payload );
-            const {Username,ApiKey} = action.payload;
-            getCompanyList(
-                {
-                    username: Username, 
-                    apiKey: ApiKey
-                }
-            );
-            return state;
         case COMPANIES_LOADED:
-            return { ...state, email: action.payload };
+            return { ...state, companies: action.payload };
+        case COMPANIES_FAILED:
+        debugger
+        return {...state, error: 'Could not load companies'+action.payload}
         default:
             return state;
 

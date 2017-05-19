@@ -1,20 +1,14 @@
-import firebase from 'firebase';
-import { GET_COMPANIES } from './types';
+import { GET_COMPANIES, LOADING } from './types';
 import { getCompanies } from '../apihelper';
 
 
 
 export const getCompanyList = ({username, apiKey}) => {
-    console.log('getCompanyList');
+    console.log('company.getCompanyList');
 
 
     return (dispatch) => {
+        getCompanies(dispatch, username, apiKey);
 
-      //  dispatch({type: LOADING});
-
-        getCompanies(dispatch,{
-            username,
-            apiKey}
-        );
-    } 
+    };
 }
