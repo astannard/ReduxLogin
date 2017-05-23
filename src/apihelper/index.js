@@ -28,6 +28,8 @@ export const doLogin = (dispatch,{username, password}) => {
         }
         else{
             const { UserResponse } = result;
+            const {Username,ApiKey} = UserResponse
+            getCompanies(dispatch,Username,ApiKey);
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 payload: UserResponse

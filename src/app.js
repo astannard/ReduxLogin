@@ -1,42 +1,66 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-import {Provider} from 'react-redux';
+import {View, Text, StyleSheet, Image, Navigator} from 'react-native';
+import {Provider, connect} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
+import {StackNavigator, addNavigationHelpers} from 'react-navigation';
 
-import firebase from 'firebase';
-
+import  router  from './config/router'
+import  getStore  from './stores/'
 import reducers from './reducers';
 
-import {Header} from './components/common';
-import LoginForm from './components/LoginForm';
+//import AppContainer from './containers/AppContainer';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: null,
+    height: null,
+  }
+})
+
+
+const Navigation = StackNavigator(router,{headerMode: 'screen'});
+
+const navReducer = (state, action) => {
+    const newState = Navigation.router.getStateForAction(action,state);
+    return newState || state; 
+}
 
 class App extends Component{
-    componentWillMount() {
-          var config = {
-            apiKey: "AIzaSyCuMarTYycsSnXg3hIpyBsUrIXhC8y-OpQ",
-            authDomain: "goal-coach-54faf.firebaseapp.com",
-            databaseURL: "https://goal-coach-54faf.firebaseio.com",
-            projectId: "goal-coach-54faf",
-            storageBucket: "goal-coach-54faf.appspot.com",
-            messagingSenderId: "725947110235"
-        };
-
-        firebase.initializeApp(config);
-    }
 
     render(){
-        
         return(
-            <Provider store={createStore(reducers,{},applyMiddleware(ReduxThunk))}>
-                <View>
-                    <Header headerText="Tech Stack" />
-                    <LoginForm />
-                </View>
-            </Provider >
+            <Navigation
+                navigation={addNavigationHelpers({
+                    dispatch: this.props.dispatch,
+                    state: this.props.nav
+                })}
+                />
         );
+
+        /*return(
+            <Image source={require('./static/bg.png')} style={styles.container}>
+                <Provider store={createStore(reducers,{},applyMiddleware(ReduxThunk))}>
+                        <AppContainer />            
+                </Provider >
+            </Image>
+        );*/
     }
 }
 
-export default App;
+const store = getStore(navReducer);
+
+const AppIndex = connect(state => ({nav: state.nav}))(App)
+
+export default Index = () => {
+    return(
+          <Image source={require('./static/bg.png')} style={styles.container}>
+            <Provider store={store}>
+                <AppIndex />
+            </Provider>
+          </Image>
+    )
+};
+
+

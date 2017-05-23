@@ -1,3 +1,5 @@
+import { NavigationActions } from 'react-navigation'
+
 import {PASSWORD_CHANGED, EMAIL_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGOUT_USER_SUCCESS, LOADING, LOADED} from '../actions/types';
 
 const INITIAL_STATE = {
@@ -7,6 +9,15 @@ const INITIAL_STATE = {
     apploading: false,
     error: ''
 }
+
+
+
+// const navigateAction = NavigationActions.navigate({
+//   routeName: 'Profile',
+//   params: {},
+//   action: NavigationActions.navigate({ routeName: 'SubProfileRoute'})
+// })
+
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){

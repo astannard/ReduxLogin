@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
+import { Tile } from 'react-native-elements';
 import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button, Spinner} from './common';
 import { emailChanged, passwordChanged, loginUser, logoutUser, loading } from '../actions';
-import { getCompanyList, } from '../actions/company';
+
 
 class LoginForm extends Component{
 
@@ -21,28 +22,21 @@ class LoginForm extends Component{
         this.props.loginUser({email, password});
     }
 
-    loadCompanies(){
-
-       const {Username,ApiKey} = this.props.user;
-               
-
-
-        console.log('attempt getCompanyList');
-
-         this.props.getCompanyList({username: Username,apiKey: ApiKey});
-    }
-
     logUserOut(){
          this.props.logoutUser();
     }
 
     render(){
-        let screen = null;
-        if(this.props.apploading){
-            screen = <Spinner />
-        }
-        else if(this.props.user===undefined || this.props.user===null){
-         screen = (<Card>
+        return (
+         <View>
+             <Tile
+                imageSrc={{require: ('../static/Directors.png')}}
+                title="Welcome"
+                icon={{name: 'play-circle', type: 'font-awesome'}}  // optional
+                contentContainerStyle={{height: 70}}
+                >
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Card>
                 <CardSection>
                     <Input
                         label="Email"
@@ -64,27 +58,13 @@ class LoginForm extends Component{
                     <Button onPress={this.loginUserPressed.bind(this)}>Login</Button>
                 </CardSection>
 
-            </Card>)
-        }else{
-            let company = (<CardSection><Text>No companies</Text></CardSection>) 
-            if (this.props.companies.length > 0 ) {
-                company = (<CardSection><Text>{this.props.companies[0].Name}</Text></CardSection>)
-            }
-            
-            screen = (<Card>
-                <Text>Logged In</Text>
-                <Text>Key:{this.props.user.ApiKey}</Text>
-       
-                <CardSection>
-                    <Button onPress={this.logUserOut.bind(this)}>Logout</Button>
-                </CardSection>
-                <CardSection>
-                    <Button onPress={this.loadCompanies.bind(this)}>Load Companies</Button>
-                </CardSection>
-                {company}
-                </Card>)
-        }
-        return screen;
+            </Card>
+                </View>
+            </Tile>
+
+        </View>)
+        
+
    
     }
 }
@@ -107,5 +87,8 @@ export default connect(mapStateToProps,{
     loginUser,
     logoutUser,
     loading,
-    getCompanyList,
 })(LoginForm);
+
+
+
+
