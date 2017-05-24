@@ -27,7 +27,8 @@ class LoginForm extends Component{
     }
 
     render(){
-        return (
+        return(<View />);
+        /*return (
          <View>
              <Tile
                 imageSrc={{require: ('../static/Directors.png')}}
@@ -63,7 +64,7 @@ class LoginForm extends Component{
             </Tile>
 
         </View>)
-        
+        */
 
    
     }

@@ -43,6 +43,12 @@ class LoginForm extends Component{
         if(!this.props.apploading){
             screen =  (
          <View>
+             <Tile
+                imageSrc={{require: ('../static/Directors.png')}}
+                title="Welcome"
+                icon={{name: 'play-circle', type: 'font-awesome'}}  // optional
+                contentContainerStyle={{height: 70}}
+                >
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Card>
                 <CardSection>
@@ -68,6 +74,7 @@ class LoginForm extends Component{
 
             </Card>
                 </View>
+            </Tile>
 
         </View>)
         }

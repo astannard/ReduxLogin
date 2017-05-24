@@ -16,9 +16,7 @@ export const doLogin = (dispatch,{username, password}) => {
             body: JSON.stringify({username, password})
     }).then((response)=> {
         console.log('login response recieved');
-            return response;   
-    }).then((responseData) => {
-        return responseData.json();
+            return response.json();   
     }).then((result) =>{
         console.log('login response is: ',result);
         if (result.Success !== true) {
@@ -56,9 +54,6 @@ export const getCompanies = (dispatch,username,apikey) => {
     }).then((response)=> {
          console.log('get companies responded:',response);
             return response.json();   
-    }).then((responseData) => {
-        console.log('get companies json unwrapped:',responseData);
-        return responseData
     }).then((result) => {
         console.log('get companies result:',result);
         console.log('get companies succeded:');

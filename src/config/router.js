@@ -41,7 +41,7 @@ export const TimeStack = StackNavigator({
   TimeList: {
     screen: TimeList,
     navigationOptions: ({ navigation }) => ({
-      title: 'Time',
+      title: 'Time entries',
       headerLeft: <LeftDrawerButton {...navigation} />
     }),
   },
@@ -113,7 +113,7 @@ export const LoginStack = StackNavigator({
     screen: LoginForm,
     navigationOptions: ({ navigation }) => ({
       title: 'Please log in',
-   
+      headerMode: 'none'
     }),
   },
 });
@@ -142,7 +142,7 @@ export const QuickEntryTabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="ios-contact" size={35} color={tintColor} />,
     },
   },
-});
+},{headerMode: 'none'});
 
 export const Drawer = DrawerNavigator({
   QuickEntry: {
@@ -158,12 +158,13 @@ export const Drawer = DrawerNavigator({
     },
   }}
 ,{
+   initialRouteName: 'QuickEntry',
   contentComponent: props => 
     <ScrollView>
       <Button title="sign out" onPress={() => logoutPressed()}></Button>
       <DrawerItems {...props} />
     </ScrollView>
-  });
+});
 
 
 
@@ -172,7 +173,7 @@ const routesconfig = {
     screen: LoginForm,
     title: 'Login'
   },
-  Welcome: {screen: WelcomeStack}
+  LoggedIn: {screen: Drawer}
 }
 
 export default routesconfig;
