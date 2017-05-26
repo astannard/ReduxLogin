@@ -10,9 +10,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
 
     switch(action.type) {
-
-        case LOGIN_USER_SUCCESS :
-            console.log('companyReducer: LOGIN_USER_SUCCESS', action.payload );
         case COMPANIES_LOADED:
             return { ...state, companies: action.payload };
         case COMPANIES_FAILED:

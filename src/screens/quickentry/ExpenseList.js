@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
-class ExpenceList extends Component{
+class ExpenseList extends Component{
 
     render(){
         return(
@@ -10,4 +10,4 @@ class ExpenceList extends Component{
     }
 }
 
-export default ExpenceList;
+export default ExpenseList;

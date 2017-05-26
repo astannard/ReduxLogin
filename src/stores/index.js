@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
-import getRootReducer from '../reducers';
+import getRootReducers from '../reducers';
 
-export default function getStore(navReducer){
-    return store = createStore(getRootReducer(navReducer),{},applyMiddleware(ReduxThunk));
+export default function getStore(){
+    return store = createStore(getRootReducers(),{},applyMiddleware(ReduxThunk));
 }

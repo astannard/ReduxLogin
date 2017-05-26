@@ -1,18 +1,14 @@
 import {combineReducers} from 'redux';
 import AuthReducer from './AuthReducer';
 import CompanyReducer from './CompanyReducer';
+import ExpenseFormReducer from './ExpenseFormReducer';
 
 
-export default function getRootReducer(navReducer){
+export default function getRootReducers(){
     return combineReducers({
-        nav: navReducer,
         auth: AuthReducer,
         companies: CompanyReducer,
+        expenseform: ExpenseFormReducer,
     })
 }
 
-// export default combineReducers({
-    
-//     auth: AuthReducer,
-//     companies: CompanyReducer,
-// })

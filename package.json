@@ -8,12 +8,13 @@
   },
   "dependencies": {
     "firebase": "^3.9.0",
+    "native-base": "^2.1.4",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-elements": "^0.12.2",
     "react-native-keyboard-aware-scroll-view": "^0.2.9",
+    "react-native-router-flux": "^3.35.0",
     "react-native-vector-icons": "^4.1.1",
-    "react-navigation": "^1.0.0-beta.9",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0"

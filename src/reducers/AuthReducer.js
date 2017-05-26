@@ -1,4 +1,3 @@
-import { NavigationActions } from 'react-navigation'
 
 import {PASSWORD_CHANGED, EMAIL_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGOUT_USER_SUCCESS, LOADING, LOADED} from '../actions/types';
 
@@ -28,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, password: action.payload }; 
         case LOGIN_USER_SUCCESS: 
             console.log('authreducer: logged in', action.payload );
-            return { ...state, ...INITIAL_STATE, user: action.payload };
+            return { ...state,  user: action.payload };
         case LOGIN_USER_FAIL:
             return { ...state, apploading: false, password: '', error:'authentication failed'};
         case LOGOUT_USER_SUCCESS:

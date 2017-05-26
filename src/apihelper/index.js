@@ -1,4 +1,6 @@
 import {LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, COMPANIES_FAILED, LOGOUT_USER_SUCCESS, COMPANIES_LOADED} from '../actions/types';
+import {Actions} from 'react-native-router-flux';
+
 const login_url = "https://api.inniaccounts.co.uk/mAPITest/api/login/login";
 const getCompanies_url = "https://api.inniaccounts.co.uk/mAPITest/api/CompanyList/GetCompanies3";
 
@@ -27,11 +29,15 @@ export const doLogin = (dispatch,{username, password}) => {
         else{
             const { UserResponse } = result;
             const {Username,ApiKey} = UserResponse
-            getCompanies(dispatch,Username,ApiKey);
+            
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 payload: UserResponse
             }); 
+
+            Actions.main();
+            
+            getCompanies(dispatch,Username,ApiKey);
         }
     }).catch(function(err) {
       console.log('Error occured',err);

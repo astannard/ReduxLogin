@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {Card, CardSection, Input, Button, Spinner} from '../components/common';
 import { emailChanged, passwordChanged, loginUser, logoutUser, loading } from '../actions';
 import { getCompanyList, } from '../actions/company';
-import { Tabs, Drawer } from '../config/router';
 
 class LoginForm extends Component{
 
@@ -27,8 +26,6 @@ class LoginForm extends Component{
 
        const {Username,ApiKey} = this.props.user;
                
-
-
         console.log('attempt getCompanyList');
 
          this.props.getCompanyList({username: Username,apiKey: ApiKey});
@@ -39,47 +36,43 @@ class LoginForm extends Component{
     }
 
     render(){
-        let screen = (<Spinner />);
-        if(!this.props.apploading){
-            screen =  (
-         <View>
-             <Tile
-                imageSrc={{require: ('../static/Directors.png')}}
-                title="Welcome"
-                icon={{name: 'play-circle', type: 'font-awesome'}}  // optional
-                contentContainerStyle={{height: 70}}
-                >
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <Card>
-                <CardSection>
-                    <Input
-                        label="Email"
-                        placeholder="whats@your.email" 
-                        onChangeText={this.onEmailChange.bind(this)}
-                        value={this.props.email}/>
-                </CardSection>
+            return  (
+                <View>
+                    <Tile
+                        imageSrc={{require: ('../static/Directors.png')}}
+                        title="Welcome"
+                        icon={{name: 'play-circle', type: 'font-awesome'}}  // optional
+                        contentContainerStyle={{height: 70}}
+                        >
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                                <Card>
+                        <CardSection>
+                            <Input
+                                label="Email"
+                                placeholder="whats@your.email" 
+                                onChangeText={this.onEmailChange.bind(this)}
+                                value={this.props.email}/>
+                        </CardSection>
 
-                <CardSection>
-                    <Input
-                        secureTextEntry
-                        label="Password" 
-                        placeholder="password"
-                        onChangeText={this.onPasswordChange.bind(this)}
-                         value={this.props.password}/>
+                        <CardSection>
+                            <Input
+                                secureTextEntry
+                                label="Password" 
+                                placeholder="password"
+                                onChangeText={this.onPasswordChange.bind(this)}
+                                value={this.props.password}/>
 
-                </CardSection>
-                <CardSection>
-                    <Button onPress={this.loginUserPressed.bind(this)}>Login</Button>
-                </CardSection>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={this.loginUserPressed.bind(this)}>Login</Button>
+                        </CardSection>
 
-            </Card>
+                    </Card>
+                        </View>
+                    </Tile>
+
                 </View>
-            </Tile>
-
-        </View>)
-        }
-        return screen;
-   
+            )
     }
 }
 
@@ -91,7 +84,7 @@ const mapStateToProps = state => {
         user: state.auth.user,
         error: state.auth.error,
         companies: state.companies.companies,
-        companyerror: state.companies.error
+        companyerror: state.companies.error,
     }
 }
 
